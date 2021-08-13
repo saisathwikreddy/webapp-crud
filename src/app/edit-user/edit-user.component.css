@@ -11,10 +11,7 @@
     display: block;
     margin: 5px 0;
   }
-  
-  .col:last-child {
-    margin-right: 0;
-  }
+
   .formcss{
     width: 95%;
    margin: 20px auto;

@@ -6,13 +6,13 @@
         </mat-card-header>
         <mat-card-content>
           <mat-form-field class="full-width">
-                <input matInput placeholder="id" formControlName="id">
+                <input matInput #input class="form-control" placeholder="id" formControlName="id" [(ngModel)]="data.id">
           </mat-form-field>
           <mat-form-field class="full-width">
-                <input matInput placeholder="name" formControlName="Name">
+                <input matInput #input class="form-control" placeholder="name" formControlName="name" [(ngModel)]="data.name">
           </mat-form-field>
           <mat-form-field class="full-width">
-                <input matInput placeholder="job" formControlName="Job">
+                <input matInput #input class="form-control" placeholder="job" formControlName="job" [(ngModel)]="data.job">
           </mat-form-field>
         </mat-card-content>
         <mat-card-actions>

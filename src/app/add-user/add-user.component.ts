@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { user } from '../model/user';
 
 @Component({
   selector: 'app-add-user',
@@ -12,7 +14,8 @@ adduserForm=this.fb.group({
   name:[null,Validators.required],
   job:[null,Validators.required]
 })
-constructor(private fb: FormBuilder) {}
+constructor(private fb: FormBuilder,public dialogRef: MatDialogRef<AddUserComponent>,
+  @Inject(MAT_DIALOG_DATA) public data: user) {}
 
   ngOnInit(): void {
   }

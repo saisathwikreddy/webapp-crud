@@ -26,7 +26,7 @@ import { DeleteUserComponent } from './delete-user/delete-user.component';
     DataTableComponent,
     AddUserComponent,
     EditUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
   ],
   imports: [
     BrowserModule,

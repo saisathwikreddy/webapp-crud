@@ -1,0 +1,15 @@
+.user-card {
+    min-width: 120px;
+    margin: 20px auto;
+}
+.formcss{
+    width: 95%;
+   margin: 20px auto;
+}
+.full-width {
+    width: 100%;
+}
+.button-row{
+    display: block;
+    width:500px;
+}
