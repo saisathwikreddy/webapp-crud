@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angularapp';
+  // foo(event:any) {
+  //   console.log(event.toElement.value);
+  // }
 }

@@ -1,0 +1,13 @@
+table, th, td{
+    border: 1px solid black;
+    width:50%
+}
+
+td{
+    width: 20%;
+    padding: 15px;
+}
+
+*{
+    margin: 0 auto;
+}
