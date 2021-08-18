@@ -5,7 +5,7 @@
       <input matInput #filter placeholder="Filter">
     </mat-form-field>
   </div>
-  <table mat-table class="full-width-table" matSort aria-label="Elements">
+  <table mat-table [dataSource]="dataService.items" class="full-width-table" matSort aria-label="Elements">
     <!-- Id Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
@@ -17,6 +17,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
       <td mat-cell *matCellDef="let row">{{row.name}}</td>
     </ng-container>
+
     <!--Job Column-->
     <ng-container matColumnDef="job">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Job</th>
@@ -26,17 +27,17 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>
         <button mat-icon-button (click)="openAddForm()">
-          <mat-icon aria-label="add" routerLink="/add" routerLinkActive="active">add</mat-icon>
+          <mat-icon aria-label="add">add</mat-icon>
         </button>
       </th>
 
       <td mat-cell *matCellDef="let row; let i=index;">
-        <button mat-icon-button (click)="startEdit(i,row.id,row.name,row.job)">
-          <mat-icon aria-label="Edit" routerLink="/edit/:{{row.id}}" routerLinkActive="active">edit</mat-icon>
+        <button mat-icon-button (click)="startEdit(row.id,row.name,row.job)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
 
-        <button mat-icon-button (click)="delete(i,row.id,row.name,row.job)">
-          <mat-icon aria-label="Delete" routerLink="/delete/:{{row.id}}" routerLinkActive="active">delete</mat-icon>
+        <button mat-icon-button (click)="delete(row.id,row.name,row.job)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
         </button>
       </td>
     </ng-container>

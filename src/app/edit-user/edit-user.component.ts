@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -14,11 +15,14 @@ export class EditUserComponent implements OnInit {
     job:[null,Validators.required]
   })
   constructor(private fb: FormBuilder,public dialogRef: MatDialogRef<EditUserComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any ) { }
+              @Inject(MAT_DIALOG_DATA) public data: any, public dataService: DataService ) { }
 
   ngOnInit(): void {
   }
   onSubmit(): void {
     
+  }
+  updateData(){
+    this.dataService.putData(this.edituserForm.value.id,this.edituserForm.value.name,this.edituserForm.value.job);
   }
 }

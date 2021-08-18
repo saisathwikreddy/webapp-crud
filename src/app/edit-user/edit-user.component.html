@@ -16,7 +16,7 @@
           </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="primary" type="submit" (click)="updateData()" [mat-dialog-close]="1">Submit</button>
         </mat-card-actions>
       </mat-card>
     </form>

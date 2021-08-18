@@ -10,7 +10,7 @@
         job: {{data.job}}
     </mat-card-content>
     <mat-card-actions class="button-row">
-        <button mat-raised-button color="warn" >Delete</button>
-        <button mat-raised-button>Cancel</button>
+        <button mat-raised-button color="warn" (click)="deleteData(data.id)" [mat-dialog-close]="1">Delete</button>
+        <button mat-raised-button [mat-dialog-close]="1">Cancel</button>
     </mat-card-actions>
 </mat-card></div>
