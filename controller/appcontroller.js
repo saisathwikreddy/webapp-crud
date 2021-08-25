@@ -2,29 +2,65 @@ require('dotenv').config()
 
 const fs = require("fs");
 const bcrypt = require("bcrypt")
-const jwt=require("jsonwebtoken")
+const jwt=require("jsonwebtoken");
+const auth=require("../middleware/auth")
 
 /**
- * checks the username and password and authenticates the user
+ * checks the username and password and authenticates the user and admin
  * @param {*} req 
  * @param {*} res 
  */
 const isAuthenticated = async (req, res) => {
     var jsonData = fs.readFileSync(__dirname + "/data.json");
     jsonData = JSON.parse(jsonData);
-    jsonData=jsonData["data"]
-    const user =jsonData.find(user => user.name ===req.body.name)
-    if(user==null) return res.status(400).send('User not Found')
+    jsonDataAdminUser=jsonData["admin"];
+    jsonDataUser=jsonData["data"];
+    var user =jsonDataAdminUser.find(user => user.name ===req.body.name);
+    if(user==null) {
+      user =jsonDataUser.find(user => user.name ===req.body.name);
+      if(user==null) return res.status(400).send('User not Found');
+    }
     try{
         if(await bcrypt.compare(req.body.password, user.password)){
-            res.status(202).send('Success')
+            const accessToken=jwt.sign(user, process.env.TOKEN_KEY,{ expiresIn :"5m"});
+            res.status(200).json({id:user.id, name:user.name, job:user.job, accessToken:accessToken});
         }
-        else res.status(203).send('Not Allowed')
+        else res.status(203).send('Not Allowed');
     }
-    catch{}
+    catch(err){
+      res.status(500).send();
+    }
 };
 
-const get_data = (req, res) => {
+/**
+ * Adds admin data exclusively into the data.json
+ * @param {*} req 
+ * @param {*} res 
+ */
+const postAdminData = async(req, res) => {
+  try {
+    var jsonData = fs.readFileSync(__dirname + "/data.json");
+    // console.log(req.body)
+    const hashedPassword=await bcrypt.hash(req.body.password, 10)
+    jsonData = JSON.parse(jsonData);
+    var temp = {};
+    temp["data"]=jsonData["data"];
+    jsonData = jsonData["admin"];
+    const user={name:req.body.name,password:hashedPassword};
+    jsonData.push(user);
+    temp["admin"] = jsonData;
+    fs.writeFileSync(__dirname + "/data.json", JSON.stringify(temp));
+    var jsonData = fs.readFileSync(__dirname + "/data.json");
+    res.status(201).send("Data added");
+  } catch(err){
+      console.log(err);
+      res.status(500).send();
+  }finally {
+    console.log("Data added");
+  }
+};
+
+const getData = (req, res) => {
   try {
     var jsonData = fs.readFileSync(__dirname + "/data.json");
     // console.log(jsonData)
@@ -38,13 +74,15 @@ const get_data = (req, res) => {
     res.status(500).send();
   }
 };
-const post_data = async(req, res) => {
+
+const postData = async(req, res) => {
   try {
     var jsonData = fs.readFileSync(__dirname + "/data.json");
     // console.log(req.body)
     const hashedPassword=await bcrypt.hash(req.body.password, 10)
     jsonData = JSON.parse(jsonData);
     var temp = {};
+    temp["admin"]=jsonData["admin"]
     jsonData = jsonData["data"];
     const user={id:req.body.id, name:req.body.name, job:req.body.job, password:hashedPassword}
     jsonData.push(user);
@@ -54,25 +92,24 @@ const post_data = async(req, res) => {
     res.status(201).send(jsonData);
   } catch(err){
       console.log(err);
-      res.status(500).send()
+      res.status(500).send();
   }finally {
     console.log("Data added");
   }
 };
 
-const update_data = (req, res) => {
+const updateData = (req, res) => {
   try {
     var isUpdated = false;
     var jsonData = fs.readFileSync(__dirname + "/data.json");
     // console.log(req.body)
     jsonData = JSON.parse(jsonData);
     jsonData = jsonData["data"];
-    console.log(jsonData);
-    const user =jsonData.find(user => user.id ===req.params.id)
-    console.log(user)
+    const user =jsonData.find(user => user.id === req.params.id)
+    console.log(req.params.id,user)
     user.name=req.body.name;
     user.job=req.body.job;
-    console.log(user)
+    console.log(user);
     var newJson = [];
     jsonData.forEach((item) => {
       if (item["id"] != req.params.id) newJson.push(item);
@@ -84,20 +121,22 @@ const update_data = (req, res) => {
     console.log(newJson)
     if (isUpdated) {
       var temp = {};
+      var jsonData = fs.readFileSync(__dirname + "/data.json");
+      // console.log(req.body)
+      jsonData = JSON.parse(jsonData);
+      temp["admin"]=jsonData["admin"]
       temp["data"] = newJson;
-
       fs.writeFileSync(__dirname + "/data.json", JSON.stringify(temp));
       // console.log(req.params)
-
       var jsonData = fs.readFileSync(__dirname + "/data.json");
-      res.status(200).send(jsonData);
+      res.status(200).send("Data updated");
     }
   } catch {
     res.status(404).send("No such data!");
   }
 };
 
-const delete_data = (req, res) => {
+const deleteData = (req, res) => {
   try {
     var isDeleted = false;
     var jsonData = fs.readFileSync(__dirname + "/data.json");
@@ -114,13 +153,15 @@ const delete_data = (req, res) => {
     });
     if (isDeleted) {
       var temp = {};
+      var jsonData = fs.readFileSync(__dirname + "/data.json");
+      //console.log(req.body)
+      jsonData = JSON.parse(jsonData);
+      temp["admin"]=jsonData["admin"]
       temp["data"] = newJson;
-
       fs.writeFileSync(__dirname + "/data.json", JSON.stringify(temp));
       console.log(req.params);
-
       var jsonData = fs.readFileSync(__dirname + "/data.json");
-      res.status(200).send(jsonData);
+      res.status(204).send("Data deleted");
     }
   } catch {
     res.status(404).send("No such data!");
@@ -128,9 +169,10 @@ const delete_data = (req, res) => {
 };
 
 module.exports = {
-  get_data,
-  post_data,
-  update_data,
-  delete_data,
+  getData,
+  postData,
+  updateData,
+  deleteData,
   isAuthenticated,
+  postAdminData,
 };

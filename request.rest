@@ -1,7 +1,31 @@
+POST http://localhost:3000/adminadd
+Content-Type: application/json
+
+{
+    "name":"admin",
+    "password":"admin"
+}
+###
+
 POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "name":"jame",
-    "password":"passwo"
+    "name":"joey",
+    "password":"password"
+}
+###
+GET http://localhost:3000/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiam9leSIsImpvYiI6InRyYWluZWUiLCJwYXNzd29yZCI6IiQyYiQxMCRkT2VVcjYxZmJUSTl4Wi9LYTE2Y0RPTUpBWnp1TDdIaHhjcG50Szh1YnZkZkJtdmtodzI4NiIsImlhdCI6MTYyOTg3NTc3NX0.dNM3G_HMyWKKLnkb5nS3APzKXIq34DyAT266SXVvmJo
+
+###
+
+POST http://localhost:3000/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiam9leSIsImpvYiI6InRyYWluZWUiLCJwYXNzd29yZCI6IiQyYiQxMCRkT2VVcjYxZmJUSTl4Wi9LYTE2Y0RPTUpBWnp1TDdIaHhjcG50Szh1YnZkZkJtdmtodzI4NiIsImlhdCI6MTYyOTg3NTc3NX0.dNM3G_HMyWKKLnkb5nS3APzKXIq34DyAT266SXVvmJo
+Content-Type: application/json
+{
+    "id":"7",
+    "name":"sathwik",
+    "job":"trainer",
+    "password":"password"
 }

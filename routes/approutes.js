@@ -1,16 +1,22 @@
 const express = require("express");
-
+const auth=require("../middleware/auth")
 const router = express.Router();
 const appcontroller = require("../controller/appcontroller");
 
-router.get("/", appcontroller.get_data);
+router.get("/",auth.authenticateToken, appcontroller.getData);
 
-router.post("/", appcontroller.post_data);
+// router.get("/", appcontroller.getData);
 
-router.put("/:id", appcontroller.update_data);
+router.post("/",auth.adminauthenticateToken,  appcontroller.postData);
 
-router.delete("/:id", appcontroller.delete_data);
+//router.post("/",  appcontroller.postData);
+
+router.put("/:id", auth.adminauthenticateToken, appcontroller.updateData);
+
+router.delete("/:id", auth.adminauthenticateToken, appcontroller.deleteData);
 
 router.post("/login", appcontroller.isAuthenticated);
+
+router.post("/adminadd", appcontroller.postAdminData);
 
 module.exports = router;
