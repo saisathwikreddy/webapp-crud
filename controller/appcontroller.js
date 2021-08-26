@@ -22,7 +22,7 @@ const isAuthenticated = async (req, res) => {
     }
     try{
         if(await bcrypt.compare(req.body.password, user.password)){
-            const accessToken=jwt.sign(user, process.env.TOKEN_KEY,{ expiresIn :"5m"});
+            const accessToken=jwt.sign(user, process.env.TOKEN_KEY);
             res.status(200).json({id:user.id, name:user.name, job:user.job, accessToken:accessToken});
         }
         else res.status(203).send('Not Allowed');
