@@ -1,4 +1,4 @@
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
 <div class="mat-elevation-z8 data-table">
   <div class="form">
     <mat-form-field floatPlaceholder="never">
@@ -26,17 +26,17 @@
 
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>
-        <button mat-icon-button (click)="openAddForm()">
+        <button mat-icon-button (click)="openAddForm()" [disabled]="isUser">
           <mat-icon aria-label="add">add</mat-icon>
         </button>
       </th>
 
       <td mat-cell *matCellDef="let row; let i=index;">
-        <button mat-icon-button (click)="startEdit(row.id,row.name,row.job)">
+        <button mat-icon-button (click)="startEdit(row.id,row.name,row.job)" [disabled]="isUser">
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
 
-        <button mat-icon-button (click)="delete(row.id,row.name,row.job)">
+        <button mat-icon-button (click)="delete(row.id,row.name,row.job)" [disabled]="isUser">
           <mat-icon aria-label="Delete">delete</mat-icon>
         </button>
       </td>

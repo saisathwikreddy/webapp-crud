@@ -1,5 +1,7 @@
 export interface user {
     id: number;
-    title: string;
+    name: string;
     job: string;
+    password: string;
+    accessToken?: string;
 }

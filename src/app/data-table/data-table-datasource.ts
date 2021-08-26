@@ -13,28 +13,28 @@ export interface DataTableItem {
 }
 
 // TODO: replace this with real data from your application
-let EXAMPLE_DATA: DataTableItem[] = [
-  {id: 1, name: 'Hydrogen', job:'elements'},
-  {id: 2, name: 'Helium', job:'elements'},
-  {id: 3, name: 'Lithium', job:'elements'},
-  {id: 4, name: 'Beryllium', job:'elements'},
-  {id: 5, name: 'Boron', job:'elements'},
-  {id: 6, name: 'Carbon', job:'elements'},
-  {id: 7, name: 'Nitrogen', job:'elements'},
-  {id: 8, name: 'Oxygen', job:'elements'},
-  {id: 9, name: 'Fluorine', job:'elements'},
-  {id: 10, name: 'Neon', job:'elements'},
-  {id: 11, name: 'Sodium', job:'elements'},
-  {id: 12, name: 'Magnesium', job:'elements'},
-  {id: 13, name: 'Aluminum', job:'elements'},
-  {id: 14, name: 'Silicon', job:'elements'},
-  {id: 15, name: 'Phosphorus', job:'elements'},
-  {id: 16, name: 'Sulfur', job:'elements'},
-  {id: 17, name: 'Chlorine', job:'elements'},
-  {id: 18, name: 'Argon', job:'elements'},
-  {id: 19, name: 'Potassium', job:'elements'},
-  {id: 20, name: 'Calcium', job:'elements'},
-];
+// let EXAMPLE_DATA: DataTableItem[] = [
+//   {id: 1, name: 'Hydrogen', job:'elements'},
+//   {id: 2, name: 'Helium', job:'elements'},
+//   {id: 3, name: 'Lithium', job:'elements'},
+//   {id: 4, name: 'Beryllium', job:'elements'},
+//   {id: 5, name: 'Boron', job:'elements'},
+//   {id: 6, name: 'Carbon', job:'elements'},
+//   {id: 7, name: 'Nitrogen', job:'elements'},
+//   {id: 8, name: 'Oxygen', job:'elements'},
+//   {id: 9, name: 'Fluorine', job:'elements'},
+//   {id: 10, name: 'Neon', job:'elements'},
+//   {id: 11, name: 'Sodium', job:'elements'},
+//   {id: 12, name: 'Magnesium', job:'elements'},
+//   {id: 13, name: 'Aluminum', job:'elements'},
+//   {id: 14, name: 'Silicon', job:'elements'},
+//   {id: 15, name: 'Phosphorus', job:'elements'},
+//   {id: 16, name: 'Sulfur', job:'elements'},
+//   {id: 17, name: 'Chlorine', job:'elements'},
+//   {id: 18, name: 'Argon', job:'elements'},
+//   {id: 19, name: 'Potassium', job:'elements'},
+//   {id: 20, name: 'Calcium', job:'elements'},
+// ];
 
 /**
  * Data source for the DataTable view. This class should
@@ -42,7 +42,8 @@ let EXAMPLE_DATA: DataTableItem[] = [
  * (including sorting, pagination, and filtering).
  */
 export class DataTableDataSource extends DataSource<DataTableItem> {
-  data: DataTableItem[] = EXAMPLE_DATA;
+  EXAMPLE_DATA:DataTableItem[]=[]
+  data: DataTableItem[] = this.EXAMPLE_DATA;
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 

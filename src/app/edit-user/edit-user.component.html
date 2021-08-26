@@ -6,7 +6,7 @@
         </mat-card-header>
         <mat-card-content>
           <mat-form-field class="full-width">
-                <input matInput #input class="form-control" placeholder="id" formControlName="id" [(ngModel)]="data.id">
+                <input matInput #input class="form-control" [readonly]="true" placeholder="id" formControlName="id" [(ngModel)]="data.id">
           </mat-form-field>
           <mat-form-field class="full-width">
                 <input matInput #input class="form-control" placeholder="name" formControlName="name" [(ngModel)]="data.name">

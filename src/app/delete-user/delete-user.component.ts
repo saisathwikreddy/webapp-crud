@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DataService } from '../data.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-delete-user',
@@ -15,7 +15,6 @@ export class DeleteUserComponent implements OnInit {
   ngOnInit(): void {
   }
   deleteData(id:number){
-    //console.log(item);
     this.dataService.deleteData(id);
   }
 }
