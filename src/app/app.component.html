@@ -1,4 +1,18 @@
-<app-home></app-home>
+
 
 <!-- <app-table></app-table> -->
+<mat-toolbar *ngIf="currentUser">
+    <span></span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon" routelink='/home' routerLinkActive="active">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" (click)="logout()">
+     <mat-icon>logout</mat-icon>
+   </button>
+  </mat-toolbar>
+ <!-- main app container -->
+ <div class="container">
+     <router-outlet></router-outlet>
+ </div>
 <router-outlet></router-outlet>

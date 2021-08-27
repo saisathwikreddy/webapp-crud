@@ -1,8 +1,11 @@
 table, th, td{
-    border: 1px solid black;
-    width:50%
+    border: 1px solid blue;
+    width:100%
 }
+.container{
+    width: max-content;
 
+}
 td{
     width: 20%;
     padding: 15px;

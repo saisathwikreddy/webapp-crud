@@ -1,6 +1,6 @@
 <div class="container">
-  <h1>Add User</h1>
-  <form #postForm="ngForm" (submit)="addData(postForm)">
+  <h1 style="color:red;">Add User</h1>
+  <form #postForm="ngForm" (submit)="addData(postForm)" style="background-color: rosybrown;">
     <input type="text" name="id" placeholder="Enter ID" [(ngModel)]="id" />
     <input
       type="text"
@@ -8,26 +8,29 @@
       placeholder="Enter name"
       [(ngModel)]="name"
     />
-    <input type="submit" value="Add data" />
+    <input type="text" name="job" placeholder="Enter job" [(ngModel)]="job" />
+    <button mat-raised-button color="primary" [disabled]="isUser" >Add data</button>
+    
   </form>
 </div>
-<div class="container">
-  <h2>User Table</h2>
+<div class="container" >
+  <h2 style="color: red;">User Table</h2>
   <table>
     <thead>
-      <td>ID</td>
-      <td>Name</td>
-      <td>Delete</td>
-      <td>Edit</td>
+      <td style="background-color: chartreuse;">ID</td>
+      <td style="background-color: chartreuse;">Name</td>
+      <td style="background-color: chartreuse;">Job</td>
+      <td style="background-color: chartreuse;">Delete</td>
+      <td style="background-color: chartreuse;">Edit</td>
     </thead>
     <tbody *ngFor="let item of service.items">
       <tr>
-        <td>{{ item.id }}</td>
-        <td>{{ item.name }}</td>
-        <td (click)="deleteData(item.id)"><i class="bx bxs-trash-alt"></i></td>
-        <td (click)="updateData(item)"><i class="bx bxs-edit-alt"></i></td>
+        <td style="background-color: darkgray;">{{ item.id }}</td>
+        <td style="background-color: darkgray;">{{ item.name }}</td>
+        <td style="background-color: darkgray;">{{ item.job }}</td>
+        <td style="background-color: darkgray;" ><button (click)="deleteData(item.id)" [disabled]="isUser"></button> <i class="bx bxs-trash-alt" ></i></td>
+        <td style="background-color: darkgray;" ><button (click)="updateData(item)" [disabled]="isUser"></button><i class="bx bxs-edit-alt" ></i></td>
       </tr>
-      <!-- </div> -->
     </tbody>
   </table>
-</div>
+  </div>

@@ -6,8 +6,10 @@ import { HttpClient} from '@angular/common/http';
 export class ServiceService {
 
 
+  
   id:number=0;
   name:string="";
+  password:string="";
   items:any = []
   flag:number=0;
   constructor(private http:HttpClient) { }
@@ -23,10 +25,10 @@ export class ServiceService {
       );
     }
 
-    put_or_postData(id:number,name:string,flag:number)//adds new data to db
+    put_or_postData(id:number,name:string,job:string,password:string,flag:number)//adds new data to db
     {if(flag){
       this.flag=0;
-      this.http.put(`http://localhost:3000/${id}`,{"id":id,"name":name})
+      this.http.put(`http://localhost:3000/${id}`,{"id":id,"name":name,"job":job,"password":password})
       .subscribe(
         (data)=>{
           
@@ -34,12 +36,13 @@ export class ServiceService {
         this.callServer();
         }
       );}
-      else{this.http.post("http://localhost:3000",{"id":id,"name":name})
+      else{this.http.post("http://localhost:3000",{"id":id,"name":name,"job":job,"password":password})
       .subscribe(
         (data)=>{alert("Success");
         this.callServer();}
       );
     }
+    
   }
   
     deleteData(id:number)
